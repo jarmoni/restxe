@@ -25,7 +25,7 @@ public final class LinkFactory {
 	 */
 	public Link createLink(final String rel, final String relativeUrl) {
 
-		return new Link().builder().rel(rel).href(this.urlResolver.getRootUrl() + relativeUrl).build();
+		return Link.builder().rel(rel).href(this.urlResolver.getRootUrl() + relativeUrl).build();
 	}
 
 }

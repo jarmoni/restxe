@@ -45,7 +45,8 @@ public class PersonDataController {
 		}
 
 		final List<Link> currentLinks = Lists.newArrayList();
-		return new Representation<PersonData>().builder().version(this.representation.getVersion()).links(currentLinks).items(currentItems).build();
+		return Representation.<PersonData> builder().version(this.representation.getVersion()).links(currentLinks)
+				.items(currentItems).build();
 	}
 
 	@RequestMapping(value = GET_PATH, method = RequestMethod.GET)
@@ -65,12 +66,13 @@ public class PersonDataController {
 
 		for (final Item<PersonData> current : representation.getItems()) {
 			current.getLinks().clear();
-			current.getLinks().add(this.linkBuilder.createLink(LinkFactory.SELF_REF, GET_PATH + "/" + current.getData().getName()));
+			current.getLinks().add(
+					this.linkBuilder.createLink(LinkFactory.SELF_REF, GET_PATH + "/" + current.getData().getName()));
 			newItems.add(current);
 		}
 
 		this.representation.getItems().addAll(newItems);
-		return new Representation<PersonData>().builder().version("1.0.0").links(newLinks).items(newItems).build();
+		return Representation.<PersonData> builder().version("1.0.0").links(newLinks).items(newItems).build();
 	}
 
 	private void checkCreateTestData() {
@@ -80,20 +82,19 @@ public class PersonDataController {
 		}
 
 		PersonData.builder().name("john").age(25).build();
-		new Item<PersonData>().builder().addLink(this.linkBuilder.createLink(LinkFactory.SELF_REF, PersonDataController.GET_PATH + "/john"))
+		Item.<PersonData> builder()
+				.link(this.linkBuilder.createLink(LinkFactory.SELF_REF, PersonDataController.GET_PATH + "/john"))
 				.data(PersonData.builder().name("john").age(25).build()).build();
 
-		this.representation = new Representation<PersonData>()
-				.builder()
+		this.representation = Representation
+				.<PersonData> builder()
 				.version("1.0.0")
-				.addLink(this.linkBuilder.createLink(LinkFactory.SELF_REF, PersonDataController.GET_PATH))
-				.addItem(
-						new Item<PersonData>().builder()
-								.addLink(this.linkBuilder.createLink(LinkFactory.SELF_REF, PersonDataController.GET_PATH + "/john"))
-								.data(PersonData.builder().name("john").age(25).build()).build())
-				.addItem(
-						new Item<PersonData>().builder()
-								.addLink(this.linkBuilder.createLink(LinkFactory.SELF_REF, PersonDataController.GET_PATH + "/jane"))
-								.data(PersonData.builder().name("jane").age(30).build()).build()).build();
+				.link(this.linkBuilder.createLink(LinkFactory.SELF_REF, PersonDataController.GET_PATH))
+				.item(Item.<PersonData> builder()
+						.link(this.linkBuilder.createLink(LinkFactory.SELF_REF, PersonDataController.GET_PATH + "/john"))
+						.data(PersonData.builder().name("john").age(25).build()).build())
+				.item(Item.<PersonData> builder()
+						.link(this.linkBuilder.createLink(LinkFactory.SELF_REF, PersonDataController.GET_PATH + "/jane"))
+						.data(PersonData.builder().name("jane").age(30).build()).build()).build();
 	}
 }

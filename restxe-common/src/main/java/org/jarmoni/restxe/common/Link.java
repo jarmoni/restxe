@@ -2,12 +2,12 @@ package org.jarmoni.restxe.common;
 
 import com.google.common.base.Objects;
 
-public class Link {
+public final class Link {
 
 	private String rel;
 	private String href;
 
-	public Link() {
+	private Link() {
 	}
 
 	public String getRel() {
@@ -18,7 +18,7 @@ public class Link {
 		return href;
 	}
 
-	public LinkBuilder builder() {
+	public static LinkBuilder builder() {
 		return new LinkBuilder();
 	}
 

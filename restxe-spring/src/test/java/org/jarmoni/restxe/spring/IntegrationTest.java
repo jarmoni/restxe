@@ -44,8 +44,8 @@ public class IntegrationTest {
 	@Test
 	public void testGetAll() throws Exception {
 
-		final Representation<PersonData> rep = this.restTemplate.getForEntity(new URI("http://localhost:8080/items/get"), Representation.class)
-				.getBody();
+		final Representation<PersonData> rep = this.restTemplate.getForEntity(new URI("http://localhost:8080/items/get"),
+				Representation.class).getBody();
 
 		assertEquals(1, rep.getLinks().size());
 		assertEquals("self", rep.getLinks().get(0).getRel());
@@ -70,8 +70,8 @@ public class IntegrationTest {
 	@Test
 	public void testGet() throws Exception {
 
-		final Representation<PersonData> rep = this.restTemplate.getForEntity(new URI("http://localhost:8080/items/get/john"), Representation.class)
-				.getBody();
+		final Representation<PersonData> rep = this.restTemplate.getForEntity(new URI("http://localhost:8080/items/get/john"),
+				Representation.class).getBody();
 
 		assertEquals("1.0.0", rep.getVersion());
 
@@ -90,13 +90,13 @@ public class IntegrationTest {
 	@Test
 	public void testAdd() throws Exception {
 
-		new Item<PersonData>().builder().data(PersonData.builder().name("doe").age(35).build());
+		Item.<PersonData> builder().data(PersonData.builder().name("doe").age(35).build());
 
-		final Representation<PersonData> newRep = new Representation<PersonData>().builder()
-				.addItem(new Item<PersonData>().builder().data(PersonData.builder().name("doe").age(35).build()).build()).build();
+		final Representation<PersonData> newRep = Representation.<PersonData> builder()
+				.item(Item.<PersonData> builder().data(PersonData.builder().name("doe").age(35).build()).build()).build();
 
-		final Representation<PersonData> rep = this.restTemplate.postForEntity(new URI("http://localhost:8080/items/add"), newRep,
-				Representation.class).getBody();
+		final Representation<PersonData> rep = this.restTemplate.postForEntity(new URI("http://localhost:8080/items/add"),
+				newRep, Representation.class).getBody();
 
 		assertEquals(0, rep.getLinks().size());
 
@@ -108,8 +108,8 @@ public class IntegrationTest {
 		assertEquals("doe", rep.getItems().get(0).getData().getName());
 		assertEquals(Integer.valueOf(35), rep.getItems().get(0).getData().getAge());
 
-		final Representation<PersonData> rep2 = this.restTemplate.getForEntity(new URI("http://localhost:8080/items/get"), Representation.class)
-				.getBody();
+		final Representation<PersonData> rep2 = this.restTemplate.getForEntity(new URI("http://localhost:8080/items/get"),
+				Representation.class).getBody();
 		assertEquals(3, rep2.getItems().size());
 	}
 }

@@ -7,6 +7,8 @@ package org.jarmoni.restxe.common;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 public class RepresentationTest {
@@ -25,13 +27,13 @@ public class RepresentationTest {
 		final Link item2SelfLink = this.linkBuilder.createLink("self", "/self/path/2");
 		final Link item2NextLink = this.linkBuilder.createLink("next", "/next/path/2");
 
-		final Item<PersonData> item1 = new Item<PersonData>().builder().data(PersonData.builder().name("john").age(25).build())
-				.addLink(item1SelfLink).addLink(item1NextLink).build();
-		final Item<PersonData> item2 = new Item<PersonData>().builder().data(PersonData.builder().name("jane").age(30).build())
-				.addLink(item2SelfLink).addLink(item2NextLink).build();
+		final Item<PersonData> item1 = Item.<PersonData> builder().data(PersonData.builder().name("john").age(25).build())
+				.links(Arrays.asList(item1SelfLink, item1NextLink)).build();
+		final Item<PersonData> item2 = Item.<PersonData> builder().data(PersonData.builder().name("jane").age(30).build())
+				.link(item2SelfLink).link(item2NextLink).build();
 
-		final Representation<PersonData> representation = new Representation<PersonData>().builder().version("1.0.0")
-				.addLink(selfLink).addLink(nextLink).addItem(item1).addItem(item2).build();
+		final Representation<PersonData> representation = Representation.<PersonData> builder().version("1.0.0").link(selfLink)
+				.links(Arrays.asList(nextLink)).item(item1).items(Arrays.asList(item2)).build();
 
 		assertEquals("1.0.0", representation.getVersion());
 

@@ -3,32 +3,31 @@ package org.jarmoni.restxe.common;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Item<T> {
+import com.google.common.base.Objects;
+
+public final class Item<T> {
 
 	private List<Link> links = new ArrayList<>();
 
 	private T data;
 
-	public Item() {
+	private Item() {
 	}
 
 	public List<Link> getLinks() {
 		return links;
 	}
 
-	public void setLinks(final List<Link> links) {
-		this.links = links;
-	}
-
 	public T getData() {
 		return data;
 	}
 
-	public void setData(final T data) {
-		this.data = data;
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(Item.class).add("links", this.links).add("data", this.data).toString();
 	}
 
-	public ItemBuilder<T> builder() {
+	public static <T> ItemBuilder<T> builder() {
 		return new ItemBuilder<>();
 	}
 
@@ -41,17 +40,17 @@ public class Item<T> {
 		}
 
 		public ItemBuilder<T> links(final List<Link> links) {
-			this.item.setLinks(links);
+			this.item.links.addAll(links);
 			return this;
 		}
 
-		public ItemBuilder<T> addLink(final Link link) {
+		public ItemBuilder<T> link(final Link link) {
 			this.item.links.add(link);
 			return this;
 		}
 
 		public ItemBuilder<T> data(final T data) {
-			this.item.setData(data);
+			this.item.data = data;
 			return this;
 		}
 
