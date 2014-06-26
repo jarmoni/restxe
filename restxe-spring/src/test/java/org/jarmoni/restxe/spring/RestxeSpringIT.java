@@ -19,14 +19,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.client.RestTemplate;
 
-public class IntegrationTest {
+public class RestxeSpringIT {
 
 	private final RestTemplate restTemplate = RestTemplateFactory.createTemplate(PersonData.class);
 	private ConfigurableApplicationContext context;
 
 	@Before
 	public void setUp() throws Exception {
-		this.context = SpringApplication.run(TestApplication.class, new String[0]);
+		this.context = SpringApplication.run(TstApplication.class, new String[0]);
 	}
 
 	@After
