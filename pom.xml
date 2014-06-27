@@ -14,12 +14,12 @@
 	<description>Simple Library for creating RESTful resource-representations</description>
 	
 	<!-- url and scm should be inherited but are required due to https://jira.codehaus.org/browse/SCM-531 -->
-	<url>https://github.com/jarmoni/${project.artifactId}</url>
+	<url>https://github.com/jarmoni/restxe</url>
 
 	<scm>
-		<url>https://github.com/jarmoni/${project.artifactId}.git</url>
-		<connection>scm:git:git@github.com:jarmoni/${project.artifactId}.git</connection>
-		<developerConnection>scm:git:git@github.com:jarmoni/${project.artifactId}.git</developerConnection>
+		<url>https://github.com/jarmoni/restxe.git</url>
+		<connection>scm:git:git@github.com:jarmoni/restxe.git</connection>
+		<developerConnection>scm:git:git@github.com:jarmoni/restxe.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
