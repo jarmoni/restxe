@@ -44,6 +44,7 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 			</plugin>
+			<!-- ##### REMOVE NEXT 2 PLUGINS WHEN SWITCHING TO 1.0.4 OF JARMONI-MAVEN-CONFIG -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
