@@ -7,7 +7,7 @@
 	</parent>
 
 	<artifactId>restxe</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>${project.artifactId}</name>
@@ -20,7 +20,7 @@
 		<url>https://github.com/jarmoni/restxe.git</url>
 		<connection>scm:git:git@github.com:jarmoni/restxe.git</connection>
 		<developerConnection>scm:git:git@github.com:jarmoni/restxe.git</developerConnection>
-		<tag>restxe-1.0.0</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<properties>
