@@ -3,11 +3,11 @@ package org.jarmoni.restxe.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 public final class Item<T> {
 
-	private List<Link> links = new ArrayList<>();
+	private final List<Link> links = new ArrayList<>();
 
 	private T data;
 
@@ -24,7 +24,7 @@ public final class Item<T> {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(Item.class).add("links", this.links).add("data", this.data).toString();
+		return MoreObjects.toStringHelper(Item.class).add("links", this.links).add("data", this.data).toString();
 	}
 
 	public static <T> ItemBuilder<T> builder() {

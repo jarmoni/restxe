@@ -2,16 +2,16 @@ package org.jarmoni.restxe.common;
 
 import java.util.List;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 
 public final class Representation<T> {
 
 	private String version;
 
-	private List<Link> links = Lists.newArrayList();
+	private final List<Link> links = Lists.newArrayList();
 
-	private List<Item<T>> items = Lists.newArrayList();
+	private final List<Item<T>> items = Lists.newArrayList();
 
 	private Representation() {
 	}
@@ -30,7 +30,7 @@ public final class Representation<T> {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(Representation.class).add("links", this.links).add("items", this.items).toString();
+		return MoreObjects.toStringHelper(Representation.class).add("links", this.links).add("items", this.items).toString();
 	}
 
 	public static <T> RepresentationBuilder<T> builder() {

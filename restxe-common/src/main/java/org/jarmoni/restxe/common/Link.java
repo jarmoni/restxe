@@ -1,6 +1,6 @@
 package org.jarmoni.restxe.common;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 public final class Link {
 
@@ -24,12 +24,12 @@ public final class Link {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(Link.class).add("rel", this.rel).add("href", this.href).toString();
+		return MoreObjects.toStringHelper(Link.class).add("rel", this.rel).add("href", this.href).toString();
 	}
 
 	public static final class LinkBuilder {
 
-		private Link link;
+		private final Link link;
 
 		private LinkBuilder() {
 			this.link = new Link();
