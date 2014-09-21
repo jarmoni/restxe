@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.jarmoni</groupId>
 		<artifactId>jarmoni-maven-config</artifactId>
-		<version>1.0.2</version>
+		<version>1.1.0</version>
 	</parent>
 
 	<artifactId>restxe</artifactId>
@@ -43,33 +43,6 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-			</plugin>
-			<!-- ##### REMOVE NEXT 2 PLUGINS WHEN SWITCHING TO 1.0.4 OF JARMONI-MAVEN-CONFIG -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
