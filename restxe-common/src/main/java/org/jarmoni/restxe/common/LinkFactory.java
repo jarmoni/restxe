@@ -8,8 +8,6 @@ import java.util.Objects;
  */
 public final class LinkFactory {
 
-	public static final String SELF_REF = "self";
-
 	private final IUrlResolver urlResolver;
 
 	public LinkFactory(final IUrlResolver urlResolver) {

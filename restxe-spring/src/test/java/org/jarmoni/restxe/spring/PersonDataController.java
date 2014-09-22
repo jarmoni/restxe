@@ -5,6 +5,7 @@ import java.util.List;
 import org.jarmoni.restxe.common.Item;
 import org.jarmoni.restxe.common.Link;
 import org.jarmoni.restxe.common.LinkFactory;
+import org.jarmoni.restxe.common.LinkType;
 import org.jarmoni.restxe.common.Representation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,8 +67,7 @@ public class PersonDataController {
 
 		for (final Item<PersonData> current : representation.getItems()) {
 			current.getLinks().clear();
-			current.getLinks().add(
-					this.linkBuilder.createLink(LinkFactory.SELF_REF, GET_PATH + "/" + current.getData().getName()));
+			current.getLinks().add(this.linkBuilder.createLink(LinkType.SELF_REF, GET_PATH + "/" + current.getData().getName()));
 			newItems.add(current);
 		}
 
@@ -82,19 +82,18 @@ public class PersonDataController {
 		}
 
 		PersonData.builder().name("john").age(25).build();
-		Item.<PersonData> builder()
-				.link(this.linkBuilder.createLink(LinkFactory.SELF_REF, PersonDataController.GET_PATH + "/john"))
+		Item.<PersonData> builder().link(this.linkBuilder.createLink(LinkType.SELF_REF, PersonDataController.GET_PATH + "/john"))
 				.data(PersonData.builder().name("john").age(25).build()).build();
 
 		this.representation = Representation
 				.<PersonData> builder()
 				.version("1.0.0")
-				.link(this.linkBuilder.createLink(LinkFactory.SELF_REF, PersonDataController.GET_PATH))
+				.link(this.linkBuilder.createLink(LinkType.SELF_REF, PersonDataController.GET_PATH))
 				.item(Item.<PersonData> builder()
-						.link(this.linkBuilder.createLink(LinkFactory.SELF_REF, PersonDataController.GET_PATH + "/john"))
+						.link(this.linkBuilder.createLink(LinkType.SELF_REF, PersonDataController.GET_PATH + "/john"))
 						.data(PersonData.builder().name("john").age(25).build()).build())
 				.item(Item.<PersonData> builder()
-						.link(this.linkBuilder.createLink(LinkFactory.SELF_REF, PersonDataController.GET_PATH + "/jane"))
+						.link(this.linkBuilder.createLink(LinkType.SELF_REF, PersonDataController.GET_PATH + "/jane"))
 						.data(PersonData.builder().name("jane").age(30).build()).build()).build();
 	}
 }
