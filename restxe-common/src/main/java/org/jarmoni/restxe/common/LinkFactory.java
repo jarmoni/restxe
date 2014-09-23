@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * @author ms Creates link-instances
- *
+ * 
  */
 public final class LinkFactory {
 
@@ -23,12 +23,9 @@ public final class LinkFactory {
 	 *            required http-verb (GET, POST,...)
 	 * @return
 	 */
-	public Link createLink(final String rel, final String relativeUrl,
-			final String httpVerb) {
+	public Link createLink(final String rel, final String relativeUrl, final String httpVerb) {
 
-		return Link.builder().rel(rel)
-				.href(this.urlResolver.getRootUrl() + relativeUrl)
-				.httpVerb(httpVerb).build();
+		return Link.builder().rel(rel).href(this.urlResolver.getRootUrl() + relativeUrl).httpVerb(httpVerb).build();
 	}
 
 }

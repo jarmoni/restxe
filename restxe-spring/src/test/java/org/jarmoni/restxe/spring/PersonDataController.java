@@ -2,6 +2,7 @@ package org.jarmoni.restxe.spring;
 
 import java.util.List;
 
+import org.jarmoni.restxe.common.HttpVerb;
 import org.jarmoni.restxe.common.Item;
 import org.jarmoni.restxe.common.Link;
 import org.jarmoni.restxe.common.LinkFactory;
@@ -67,7 +68,8 @@ public class PersonDataController {
 
 		for (final Item<PersonData> current : representation.getItems()) {
 			current.getLinks().clear();
-			current.getLinks().add(this.linkBuilder.createLink(LinkType.SELF_REF, GET_PATH + "/" + current.getData().getName()));
+			current.getLinks().add(
+					this.linkBuilder.createLink(LinkType.SELF_REF, GET_PATH + "/" + current.getData().getName(), HttpVerb.GET));
 			newItems.add(current);
 		}
 
@@ -82,18 +84,21 @@ public class PersonDataController {
 		}
 
 		PersonData.builder().name("john").age(25).build();
-		Item.<PersonData> builder().link(this.linkBuilder.createLink(LinkType.SELF_REF, PersonDataController.GET_PATH + "/john"))
+		Item.<PersonData> builder()
+				.link(this.linkBuilder.createLink(LinkType.SELF_REF, PersonDataController.GET_PATH + "/john", HttpVerb.GET))
 				.data(PersonData.builder().name("john").age(25).build()).build();
 
 		this.representation = Representation
 				.<PersonData> builder()
 				.version("1.0.0")
-				.link(this.linkBuilder.createLink(LinkType.SELF_REF, PersonDataController.GET_PATH))
-				.item(Item.<PersonData> builder()
-						.link(this.linkBuilder.createLink(LinkType.SELF_REF, PersonDataController.GET_PATH + "/john"))
-						.data(PersonData.builder().name("john").age(25).build()).build())
-				.item(Item.<PersonData> builder()
-						.link(this.linkBuilder.createLink(LinkType.SELF_REF, PersonDataController.GET_PATH + "/jane"))
-						.data(PersonData.builder().name("jane").age(30).build()).build()).build();
+				.link(this.linkBuilder.createLink(LinkType.SELF_REF, PersonDataController.GET_PATH, HttpVerb.GET))
+				.item(Item
+						.<PersonData> builder()
+						.link(this.linkBuilder.createLink(LinkType.SELF_REF, PersonDataController.GET_PATH + "/john",
+								HttpVerb.GET)).data(PersonData.builder().name("john").age(25).build()).build())
+				.item(Item
+						.<PersonData> builder()
+						.link(this.linkBuilder.createLink(LinkType.SELF_REF, PersonDataController.GET_PATH + "/jane",
+								HttpVerb.GET)).data(PersonData.builder().name("jane").age(30).build()).build()).build();
 	}
 }
