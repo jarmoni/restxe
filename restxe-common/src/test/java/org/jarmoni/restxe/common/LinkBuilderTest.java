@@ -16,9 +16,10 @@ public class LinkBuilderTest {
 	@Test
 	public void testCreateLink() throws Exception {
 
-		final Link link = this.linkFactory.createLink("self", "/my/path");
+		final Link link = this.linkFactory.createLink("self", "/my/path", HttpVerb.GET);
 		assertEquals("self", link.getRel());
 		assertEquals("http://myhost:8080/my/path", link.getHref());
+		assertEquals("GET", link.getHttpVerb());
 	}
 
 }

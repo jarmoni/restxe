@@ -2,10 +2,10 @@ package org.jarmoni.restxe.common;
 
 public final class HttpVerb {
 
-	public static final String GET = "get";
-	public static final String POST = "post";
-	public static final String PUT = "put";
-	public static final String DELETE = "delete";
+	public static final String GET = "GET";
+	public static final String POST = "POST";
+	public static final String PUT = "PUT";
+	public static final String DELETE = "DELETE";
 
 	private HttpVerb() {
 	}

@@ -18,14 +18,14 @@ public class RepresentationTest {
 	@Test
 	public void testCreateRepresentation() throws Exception {
 
-		final Link selfLink = this.linkBuilder.createLink("self", "/self/path");
-		final Link nextLink = this.linkBuilder.createLink("next", "/next/path");
+		final Link selfLink = this.linkBuilder.createLink("self", "/self/path", HttpVerb.GET);
+		final Link nextLink = this.linkBuilder.createLink("next", "/next/path", HttpVerb.PUT);
 
-		final Link item1SelfLink = this.linkBuilder.createLink("self", "/self/path/1");
-		final Link item1NextLink = this.linkBuilder.createLink("next", "/next/path/1");
+		final Link item1SelfLink = this.linkBuilder.createLink("self", "/self/path/1", HttpVerb.POST);
+		final Link item1NextLink = this.linkBuilder.createLink("next", "/next/path/1", HttpVerb.DELETE);
 
-		final Link item2SelfLink = this.linkBuilder.createLink("self", "/self/path/2");
-		final Link item2NextLink = this.linkBuilder.createLink("next", "/next/path/2");
+		final Link item2SelfLink = this.linkBuilder.createLink("self", "/self/path/2", HttpVerb.GET);
+		final Link item2NextLink = this.linkBuilder.createLink("next", "/next/path/2", HttpVerb.GET);
 
 		final Item<PersonData> item1 = Item.<PersonData> builder().data(PersonData.builder().name("john").age(25).build())
 				.links(Arrays.asList(item1SelfLink, item1NextLink)).build();
@@ -42,16 +42,21 @@ public class RepresentationTest {
 
 		assertEquals("self", representation.getLinks().get(0).getRel());
 		assertEquals("http://myhost:8080/self/path", representation.getLinks().get(0).getHref());
+		assertEquals("GET", representation.getLinks().get(0).getHttpVerb());
 		assertEquals("next", representation.getLinks().get(1).getRel());
 		assertEquals("http://myhost:8080/next/path", representation.getLinks().get(1).getHref());
+		assertEquals("PUT", representation.getLinks().get(1).getHttpVerb());
 
 		assertEquals("john", representation.getItems().get(0).getData().getName());
 		assertEquals(Integer.valueOf(25), representation.getItems().get(0).getData().getAge());
 		assertEquals(2, representation.getItems().get(0).getLinks().size());
 		assertEquals("self", representation.getItems().get(0).getLinks().get(0).getRel());
 		assertEquals("http://myhost:8080/self/path/1", representation.getItems().get(0).getLinks().get(0).getHref());
+		assertEquals("POST", representation.getItems().get(0).getLinks().get(0).getHttpVerb());
+
 		assertEquals("next", representation.getItems().get(0).getLinks().get(1).getRel());
 		assertEquals("http://myhost:8080/next/path/1", representation.getItems().get(0).getLinks().get(1).getHref());
+		assertEquals("DELETE", representation.getItems().get(0).getLinks().get(1).getHttpVerb());
 
 		assertEquals("jane", representation.getItems().get(1).getData().getName());
 		assertEquals(Integer.valueOf(30), representation.getItems().get(1).getData().getAge());
