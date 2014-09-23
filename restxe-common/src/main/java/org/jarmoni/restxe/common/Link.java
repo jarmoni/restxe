@@ -6,6 +6,7 @@ public final class Link {
 
 	private String rel;
 	private String href;
+	private String httpVerb;
 
 	private Link() {
 	}
@@ -18,13 +19,18 @@ public final class Link {
 		return href;
 	}
 
+	public String getHttpVerb() {
+		return httpVerb;
+	}
+
 	public static LinkBuilder builder() {
 		return new LinkBuilder();
 	}
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(Link.class).add("rel", this.rel).add("href", this.href).toString();
+		return MoreObjects.toStringHelper(Link.class).add("rel", this.rel).add("href", this.href).add("httpVerb", this.httpVerb)
+				.toString();
 	}
 
 	public static final class LinkBuilder {
@@ -42,6 +48,11 @@ public final class Link {
 
 		public LinkBuilder href(final String href) {
 			this.link.href = href;
+			return this;
+		}
+
+		public LinkBuilder httpVerb(final String httpVerb) {
+			this.link.httpVerb = httpVerb;
 			return this;
 		}
 
