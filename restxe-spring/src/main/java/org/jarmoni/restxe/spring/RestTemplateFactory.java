@@ -5,13 +5,17 @@
  */
 package org.jarmoni.restxe.spring;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jarmoni.restxe.common.Representation;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JavaType;
@@ -23,7 +27,24 @@ public final class RestTemplateFactory {
 	}
 
 	public static RestTemplate createTemplate(final Class<?> paramClass) {
-		final RestTemplate restTemplate = new RestTemplate();
+		return createTemplate(paramClass, null);
+	}
+
+	public static RestTemplate createTemplate(final Class<?> paramClass, final ClientHttpRequestFactory requestFactory) {
+		final RestTemplate restTemplate = requestFactory != null ? new RestTemplate(requestFactory) : new RestTemplate();
+		restTemplate.setErrorHandler(new ResponseErrorHandler() {
+
+			@Override
+			public boolean hasError(final ClientHttpResponse response) throws IOException {
+				return !response.getStatusCode().is2xxSuccessful();
+			}
+
+			@Override
+			public void handleError(final ClientHttpResponse response) throws IOException {
+				// Do nothing. The caller should evaluate the error code and
+				// handle the error appropriately
+			}
+		});
 		final HttpMessageConverter<?> messageConverter = new MappingJackson2HttpMessageConverter() {
 			@Override
 			protected JavaType getJavaType(final Type type, final Class<?> contextClass) {

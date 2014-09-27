@@ -13,6 +13,8 @@ public final class Representation<T> {
 
 	private final List<Item<T>> items = Lists.newArrayList();
 
+	private String errorMessage;
+
 	private Representation() {
 	}
 
@@ -26,6 +28,10 @@ public final class Representation<T> {
 
 	public List<Item<T>> getItems() {
 		return items;
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
 	}
 
 	@Override
@@ -71,6 +77,11 @@ public final class Representation<T> {
 
 		public RepresentationBuilder<T> item(final Item<T> item) {
 			this.representation.items.add(item);
+			return this;
+		}
+
+		public RepresentationBuilder<T> errorMessage(final String errorMessage) {
+			this.representation.errorMessage = errorMessage;
 			return this;
 		}
 	}
